@@ -62,31 +62,17 @@ const getWeatherData = async (city) => {
   let nameval = data2[0].name;
   let desc = data2[0].weather[0].main;
   let temperature = data2[0].main.temp;
-  // console.log(nameval,desc,temperature);
+  let imgIcon = data2[0].weather[0].icon;
 
-  function getIcon(wheather) {
-    wheather = wheather.toLowerCase();
-
-    switch (wheather) {
-      case "clear":
-        return '<i class="fa-solid fa-sun fa-spin" style="color:coral;font-size: 5rem;"></i>';
-      case "haze":
-        return '<i class="fa-solid fa-smog fa-bounce" style="font-size: 5rem;"></i>';
-      case "smoke":
-        return '<i class="fa-solid fa-smog fa-bounce" style="font-size: 5rem;"></i>';
-
-      case "clouds":
-        return ' <i class="fa-solid fa-cloud-sun fa-bounce" style="font-size: 5rem;"></i>';
-      case "rainy":
-        return '<i class="fa-solid fa-cloud-showers-heavy fa-beat-fade" style="font-size: 5rem;"></i>';
-      case "thunder":
-        return '<i class="fa-solid fa-cloud-bolt fa-shake" style="font-size: 5rem;"></i>';
-    }
+  
+  const getIcon = (icon) => {
+    return `https://openweathermap.org/img/wn/${icon}@2x.png`;
   }
+
 
   details.innerHTML = `${nameval} weather: ${desc}`;
   tmp.innerHTML = `${conver(temperature)} C`;
-  iconsWeather.innerHTML = getIcon(desc);
+  iconsWeather.src = getIcon(imgIcon);
   // // we will get temp we have to fixed the value;
   function conver(val) {
     return (val - 273).toFixed(1);
